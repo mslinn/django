@@ -1,0 +1,5 @@
+For each Django app that needs an entry in the project-level templates/ subdirectory, create a subdirectory tree called <app_name>/:
+
+templates/
+  |-- <app_name>/
+  |     |-- index.html

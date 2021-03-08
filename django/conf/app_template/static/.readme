@@ -1,0 +1,7 @@
+For each Django app that needs an entry in the project-level static/ subdirectory, create a subdirectory tree called <app_name>/:
+
+static/
+  |-- <app_name>/
+  |     |-- css/
+  |     |-- img/
+  |     |-- js/
