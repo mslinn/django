@@ -1,0 +1,6 @@
+Each Django app can have its own templatetags/ directory.
+This shows how to namespace tempatetags:
+
+templatetags/
+  |-- <app_name>/
+  |     |-- index.html

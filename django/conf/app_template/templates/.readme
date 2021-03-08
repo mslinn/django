@@ -1,4 +1,5 @@
-For each Django app that needs an entry in the project-level templates/ subdirectory, create a subdirectory tree called <app_name>/:
+Each Django app can have its own templates/ directory.
+This shows how to namespace templates:
 
 templates/
   |-- <app_name>/
