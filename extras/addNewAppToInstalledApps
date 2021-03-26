@@ -11,7 +11,9 @@ The first letter of newAppName will be appropriately capitalized where necessary
 
 This script requires that Django be checked out into $django/django
 and the Django git project branch be set to django-oscar.
-  "
+
+NOTE: If your Django webapp uses corsheaders, ensure that it is the first app listed after this script finishes.
+"
   exit 1
 }
 
