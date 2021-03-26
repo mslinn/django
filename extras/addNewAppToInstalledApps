@@ -51,6 +51,6 @@ if [ ! -d "$APP_TEMPLATE" ]; then
 fi
 
 
-#./manage.py startapp --template "$APP_TEMPLATE" "$NEW_APP_NAME"
+./manage.py startapp --template "$APP_TEMPLATE" "$NEW_APP_NAME"
 
 sed -i "/$REGEX.*/a \ \ \ \ '${NEW_APP_NAME,,}.apps.${NEW_APP_NAME^}Config'," "$SETTINGS_FILE"
