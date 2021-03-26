@@ -1,0 +1,56 @@
+#!/bin/bash
+
+function help {
+  printf "$1
+$(basename $0) - Add a new Django app name to the top of 'INSTALLED_APPS' in settings.
+
+Usage:
+  $(basename $0) newAppName
+
+The first letter of newAppName will be appropriately capitalized where necessary.
+
+This script requires that Django be checked out into $django/django
+and the Django git project branch be set to django-oscar.
+  "
+  exit 1
+}
+
+if [ -z "$1" ]; then help "\nError: no Django app name specified.\n"; fi
+
+NEW_APP_NAME="$1"
+shift
+
+REGEX='^INSTALLED_APPS ='
+SETTINGS_FILE="$(
+  grep -lrI "$REGEX" . \
+    --include=\*.py \
+    --exclude-dir={.git,.idea,.vscode,bin,cache,node_modules} | \
+  tail -n 1
+)"
+
+if [ -z "$SETTINGS_FILE" ]; then
+  echo "Error: no Python file with contents matching '$REGEX' was found in $(pwd)"
+  exit 2
+fi
+
+if [ -z "$django" ]; then
+  echo "Error: Please define an environment variable called 'django', pointing to the Django git project."
+  exit 2
+fi
+
+if [ ! -d "$django/django" ]; then
+  echo "Error: The '$django/django' directory does not exist.
+Please clone the Django git project into $django and checkout the 'django-oscar' branch."
+  exit 2
+fi
+
+APP_TEMPLATE="$django/django/django/conf/app_template"
+if [ ! -d "$APP_TEMPLATE" ]; then
+  echo "Error: The '$APP_TEMPLATE' directory does not exist. Please checkout the 'django-oscar' branch in '$django/django'."
+  exit 2
+fi
+
+
+#./manage.py startapp --template "$APP_TEMPLATE" "$NEW_APP_NAME"
+
+sed -i "/$REGEX.*/a \ \ \ \ '${NEW_APP_NAME,,}.apps.${NEW_APP_NAME^}Config,'" "$SETTINGS_FILE"
