@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+from oscar.core.application import OscarConfig
 
-class {{ camel_case_app_name }}Config(AppConfig):
+class {{ camel_case_app_name }}Config(OscarConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = '{{ app_name }}'
